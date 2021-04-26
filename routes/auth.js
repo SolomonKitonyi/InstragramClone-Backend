@@ -4,8 +4,13 @@ const jwt = require("jsonwebtoken");
 const express = require("express");
 const router = express.Router();
 const User = mongoose.model("User");
+const requireLogin = require("../middleware/requireLogin");
 
 const { jwt_secret } = require("../keys");
+
+router.get("/protected", requireLogin, (req, res) => {
+  res.send("Hello");
+});
 
 router.post("/signup", (req, res) => {
   const { name, email, password } = req.body;
