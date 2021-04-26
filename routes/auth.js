@@ -1,11 +1,8 @@
 const mongoose = require("mongoose");
+const bcrypt = require("bcrypt");
 const express = require("express");
 const router = express.Router();
 const User = mongoose.model("User");
-
-router.get("/", (req, res) => {
-  res.send("Hello");
-});
 
 router.post("/signup", (req, res) => {
   const { name, email, password } = req.body;
