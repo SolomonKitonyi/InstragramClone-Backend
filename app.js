@@ -2,6 +2,12 @@ const mongoose = require("mongoose");
 const express = require("express");
 const app = express();
 
+require("./models/user");
+require("./models/post");
+app.use(express.json());
+app.use(require("./routes/auth"));
+app.use(require("./routes/post"));
+
 const { MONGOURL } = require("./keys");
 
 mongoose.connect(MONGOURL, {
@@ -17,11 +23,6 @@ mongoose.connection.on("connected", () => {
 mongoose.connection.on("error", (error) => {
   console.log("Error connecting to MongoDB ", error);
 });
-
-require("./models/user");
-require("./models/post");
-app.use(express.json());
-app.use(require("./routes/auth"));
 
 const PORT = process.env.PORT || 5000;
 
