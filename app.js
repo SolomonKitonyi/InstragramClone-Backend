@@ -3,8 +3,6 @@ const express = require("express");
 const app = express();
 
 require("./models/user");
-app.use(express.json());
-app.use(require("./routes/auth"));
 
 const { MONGOURL } = require("./keys");
 
@@ -21,6 +19,9 @@ mongoose.connection.on("connected", () => {
 mongoose.connection.on("error", (error) => {
   console.log("Error connecting to MongoDB ", error);
 });
+
+app.use(express.json());
+app.use(require("./routes/auth"));
 
 const PORT = process.env.PORT || 5000;
 
